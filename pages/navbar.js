@@ -82,6 +82,19 @@ const NavBar = () => {
 
                 <Flex flexDir="column" align="center" gap={5}>
                   <Button
+                    colorScheme={"transparent"}
+                    width={170}
+                    onClick={() => router.push("/")}
+                  >
+                    <Image
+                      src={"/Embrace.png"}
+                      alt={"embrace"}
+                      width={200}
+                      height={200}
+                      layout={"responsive"}
+                    />
+                  </Button>
+                  <Button
                     _hover={{
                       textDecoration: "underline",
                     }}

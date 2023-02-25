@@ -52,7 +52,11 @@ const BottomNav = () => {
         >
           <Flex direction={"column"} alignItems={"left"} gap={6}>
             <Flex direction={"column"}>
-              <Button colorScheme={"transparent"} width={170}>
+              <Button
+                colorScheme={"transparent"}
+                width={170}
+                onClick={() => router.push("/")}
+              >
                 <Image
                   src={"/Embrace2.png"}
                   alt={"embrace"}
@@ -210,7 +214,11 @@ const BottomNav = () => {
           >
             <Flex direction={"column"} alignItems={"left"} gap={6}>
               <Flex direction={"column"}>
-                <Button colorScheme={"transparent"} width={170}>
+                <Button
+                  colorScheme={"transparent"}
+                  width={170}
+                  onClick={() => router.push("/")}
+                >
                   <Image
                     src={"/Embrace2.png"}
                     alt={"embrace"}
