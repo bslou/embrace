@@ -62,7 +62,7 @@ const ShopComp = (url, name, img, rev, orig, ne, router) => {
         width={"50%"}
         fontWeight={700}
         color={"white"}
-        fontSize={"13pt"}
+        fontSize={{ base: "10pt", md: "13pt" }}
         borderRadius={20}
       >
         Save ${orig - ne}
