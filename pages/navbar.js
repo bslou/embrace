@@ -72,6 +72,7 @@ const NavBar = () => {
             fontSize={"14pt"}
             colorScheme={"transparent"}
             color={"black"}
+            onClick={() => router.push("/bestsellers")}
           >
             Best Sellers
           </Button>
@@ -83,6 +84,7 @@ const NavBar = () => {
             fontSize={"14pt"}
             colorScheme={"transparent"}
             color={"black"}
+            onClick={() => router.push("/shirts")}
           >
             Shirts
           </Button>
@@ -94,6 +96,7 @@ const NavBar = () => {
             fontSize={"14pt"}
             colorScheme={"transparent"}
             color={"black"}
+            onClick={() => router.push("/hoodies")}
           >
             Hoodies
           </Button>
@@ -105,6 +108,7 @@ const NavBar = () => {
             fontSize={"14pt"}
             colorScheme={"transparent"}
             color={"black"}
+            onClick={() => router.push("/sweaters")}
           >
             Sweaters
           </Button>

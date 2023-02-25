@@ -59,7 +59,7 @@ const ShopComp = (url, name, img, rev, orig, ne, router) => {
       <Button
         backgroundColor={"green.400"}
         colorScheme={"transparent"}
-        width={"30%"}
+        width={"50%"}
         fontWeight={700}
         color={"white"}
         fontSize={"13pt"}

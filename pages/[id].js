@@ -74,13 +74,16 @@ const Case = () => {
     },
   ];
 
-  function handleKeyDown(event) {
-    if (event.key === "Backspace") {
-      event.preventDefault();
-    }
-  }
+  // function handleKeyDown(event) {
+  //   if (event.key === "Backspace" && quant <= 9) {
+  //     event.preventDefault();
+  //   }
+  // }
 
   useEffect(() => {
+    if ((quant == "") | (quant == 0)) {
+      setQuant(1);
+    }
     var val = router.query.id;
     console.log(router.query.id);
     info.find(function (item, i) {
@@ -90,7 +93,7 @@ const Case = () => {
       }
     });
     console.log(ind);
-  }, [router]);
+  }, [router, quant]);
   return (
     <Flex direction={"column"} alignItems={"center"} width={"100%"}>
       <NavBar />
@@ -160,7 +163,7 @@ const Case = () => {
                 value={quant}
                 textAlign={"center"}
                 maxWidth={80}
-                onKeyDown={handleKeyDown}
+                //onKeyDown={handleKeyDown}
                 onChange={(e) => setQuant(e.target.value)}
               />
               <Button

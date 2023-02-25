@@ -91,6 +91,7 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [rows, setRows] = useState([]);
   const [temprows, setTemprows] = useState([]);
+  const [count, setCount] = useState(0);
   useEffect(() => {
     setRows([]);
     info.forEach((element) => {
@@ -129,11 +130,14 @@ export default function Home() {
         ]);
       }
     });
+    if (count == 0) {
+      setCount(1);
+    }
     const intervalId = setInterval(() => {
       setCurrentSlide((currentSlide + 1) % quotes.length);
     }, 3000);
     return () => clearInterval(intervalId);
-  }, [currentSlide]);
+  }, [currentSlide, count]);
 
   return (
     <Flex
@@ -149,6 +153,7 @@ export default function Home() {
         _hover={{
           cursor: "pointer",
         }}
+        onClick={() => router.push("/all")}
       >
         <NextImage
           src={"/embracedesign.png"}
@@ -291,6 +296,7 @@ export default function Home() {
           fontSize={"15pt"}
           borderRadius={20}
           colorScheme={"transparent"}
+          onClick={() => router.push("/all")}
         >
           View More
         </Button>
@@ -349,6 +355,7 @@ export default function Home() {
               paddingTop={7}
               paddingBottom={7}
               colorScheme={"transparent"}
+              onClick={() => router.push("/all")}
             >
               BROWSE ALL EMBRACE DESIGNS
             </Button>
