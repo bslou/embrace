@@ -18,7 +18,7 @@ const ShopComp = (url, name, img, rev, orig, ne, router) => {
     <Flex
       direction={"column"}
       justifyContent={"center"}
-      width={"20%"}
+      width={{ base: "40%", md: "30%", lg: "23%" }}
       as={"a"}
       _hover={{
         cursor: "pointer",

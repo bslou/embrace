@@ -21,10 +21,14 @@ const Story = () => {
           width={"100%"}
         >
           <Flex direction={"column"} padding={10} width={"50%"}>
-            <Text fontSize={"30pt"} fontWeight={800} fontStyle={"italic"}>
+            <Text
+              fontSize={{ base: "20pt", md: "25pt", lg: "30pt" }}
+              fontWeight={800}
+              fontStyle={"italic"}
+            >
               OUR STORY
             </Text>
-            <Text fontSize={"18pt"}>
+            <Text fontSize={{ base: "9pt", md: "13pt", lg: "18pt" }}>
               Benjamin Sloutsky founded Embrace as he was going through hard
               times in life. Ben was constantly hit with negative whether it
               would be related to school, family situations, or living
@@ -46,10 +50,14 @@ const Story = () => {
         >
           <Image src="/ido.png" alt={"Embrace brand"} width={"50%"} />
           <Flex direction={"column"} padding={10} width={"50%"}>
-            <Text fontSize={"30pt"} fontWeight={800} fontStyle={"italic"}>
+            <Text
+              fontSize={{ base: "20pt", md: "25pt", lg: "30pt" }}
+              fontWeight={800}
+              fontStyle={"italic"}
+            >
               OUR IDEA
             </Text>
-            <Text fontSize={"18pt"}>
+            <Text fontSize={{ base: "9pt", md: "13pt", lg: "18pt" }}>
               With Embrace we hope to spread the message to never quit and keep
               fighting as a win will occur in the future. We want people to
               enjoy and embrace obstacles in order to get through them faster.

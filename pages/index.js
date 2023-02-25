@@ -22,6 +22,8 @@ import ShopComp from "./shopcomp";
 export default function Home() {
   const HUNTER_API_KEY = "f1a8d6ee93ae02348e0c0a2bd693e42b010c375e";
   const router = useRouter();
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
 
   const quotes = [
     {
@@ -92,10 +94,28 @@ export default function Home() {
   const [rows, setRows] = useState([]);
   const [temprows, setTemprows] = useState([]);
   const [count, setCount] = useState(0);
+  const [num, setNum] = useState(4);
   useEffect(() => {
+    function updateScreenSize() {
+      setScreenWidth(window.innerWidth);
+      setScreenHeight(window.innerHeight);
+    }
+    updateScreenSize();
+    window.addEventListener("resize", updateScreenSize);
+
+    return () => window.removeEventListener("resize", updateScreenSize);
+  }, []);
+  useEffect(() => {
+    if (innerWidth >= 1200) {
+      setNum(4);
+    } else if (innerWidth >= 900) {
+      setNum(3);
+    } else if (innerWidth < 900) {
+      setNum(2);
+    }
     setRows([]);
     info.forEach((element) => {
-      if (temprows.length % 4 == 0 && temprows.length != 0) {
+      if (temprows.length % 4 == 0 && temprows.length != 0 && num % 4 == 0) {
         setRows((prevRows) => [
           ...prevRows,
           <Flex
@@ -109,6 +129,25 @@ export default function Home() {
             {temprows[1]}
             {temprows[2]}
             {temprows[3]}
+          </Flex>,
+        ]);
+        if (rows.includes(temprows[3])) {
+          setTemprows([]);
+        }
+      } else if (temprows.length % num == 0 && temprows.length != 0) {
+        setRows((prevRows) => [
+          ...prevRows,
+          <Flex
+            direction={"row"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            width={"100%"}
+            gap={2}
+          >
+            {num - 4 >= 0 ? temprows[num - 4] : null}
+            {num - 3 >= 0 ? temprows[num - 3] : null}
+            {num - 2 >= 0 ? temprows[num - 2] : null}
+            {temprows[num - 1]}
           </Flex>,
         ]);
         if (rows.includes(temprows[3])) {
@@ -137,7 +176,7 @@ export default function Home() {
       setCurrentSlide((currentSlide + 1) % quotes.length);
     }, 3000);
     return () => clearInterval(intervalId);
-  }, [currentSlide, count]);
+  }, [currentSlide, count, num, screenWidth]);
 
   return (
     <Flex
@@ -177,8 +216,9 @@ export default function Home() {
           transition="opacity 0.5s ease-in-out"
           //position={"absolute"}
           fontWeight={600}
-          fontSize={"14pt"}
+          fontSize={{ base: "10pt", md: "12pt", lg: "14pt" }}
           color={"#0A2A3E"}
+          textAlign={"center"}
           //bottom={135}
         >
           {quotes[currentSlide].quote}
@@ -186,7 +226,9 @@ export default function Home() {
         <Text
           //visibility={index === currentSlide ? "visible" : "hidden"}
           //position={"absolute"}
+          fontSize={{ base: "8pt", md: "10pt", lg: "12pt" }}
           fontStyle={"italic"}
+          textAlign={"center"}
           color={"#0A2A3E"}
           //bottom={100}
         >
@@ -217,7 +259,7 @@ export default function Home() {
             justifyContent={"center"}
             backgroundImage={"url('/ex.png')"}
             backgroundSize={"100% 100%"}
-            height={400}
+            height={{ base: 180, md: 280, lg: 380 }}
             width={"30%"}
             borderRadius={15}
             as={"a"}
@@ -227,8 +269,13 @@ export default function Home() {
               opacity: 0.7,
               cursor: "pointer",
             }}
+            onClick={() => router.push("/all")}
           >
-            <Text color={"white"} fontWeight={700} fontSize={"23pt"}>
+            <Text
+              color={"white"}
+              fontWeight={700}
+              fontSize={{ base: "13pt", md: "18pt", lg: "23pt" }}
+            >
               Shop Embrace
             </Text>
           </Flex>
@@ -238,7 +285,7 @@ export default function Home() {
             justifyContent={"center"}
             backgroundImage={"url('/ex.png')"}
             backgroundSize={"100% 100%"}
-            height={400}
+            height={{ base: 180, md: 280, lg: 380 }}
             width={"30%"}
             borderRadius={15}
             as={"a"}
@@ -248,9 +295,14 @@ export default function Home() {
               opacity: 0.7,
               cursor: "pointer",
             }}
+            onClick={() => router.push("/sweaters")}
           >
-            <Text color={"white"} fontWeight={700} fontSize={"23pt"}>
-              Shop Sweatshirts
+            <Text
+              color={"white"}
+              fontWeight={700}
+              fontSize={{ base: "13pt", md: "18pt", lg: "23pt" }}
+            >
+              Shop Sweaters
             </Text>
           </Flex>
           <Flex
@@ -258,7 +310,7 @@ export default function Home() {
             alignItems={"center"}
             justifyContent={"center"}
             backgroundImage={"url('/ex.png')"}
-            height={400}
+            height={{ base: 180, md: 280, lg: 380 }}
             backgroundSize={"100% 100%"}
             width={"30%"}
             borderRadius={15}
@@ -269,8 +321,13 @@ export default function Home() {
               opacity: 0.7,
               cursor: "pointer",
             }}
+            onClick={() => router.push("/hoodies")}
           >
-            <Text color={"white"} fontWeight={700} fontSize={"23pt"}>
+            <Text
+              color={"white"}
+              fontWeight={700}
+              fontSize={{ base: "13pt", md: "18pt", lg: "23pt" }}
+            >
               Shop Hoodies
             </Text>
           </Flex>
@@ -320,7 +377,12 @@ export default function Home() {
           height={500}
           gap={"5%"}
         >
-          <Image src="/ex.png" width={"47.5%"} alt={"Image"} height={"100%"} />
+          <Image
+            src="/ex.png"
+            width={"47.5%"}
+            alt={"Image"}
+            height={{ base: "70%", md: "85%", lg: "100%" }}
+          />
           <Flex
             direction={"column"}
             alignItems={"left"}
@@ -328,21 +390,36 @@ export default function Home() {
             width={"47.5%"}
             gap={5}
           >
-            <Text fontWeight={700} fontSize={"18pt"}>
+            <Text
+              fontWeight={700}
+              fontSize={{ base: "14pt", md: "16pt", lg: "18pt" }}
+            >
               "Embrace is like a blend between luxury and helping people get
               through tougher times"
             </Text>
             <UnorderedList>
-              <ListItem fontSize={"14pt"} marginTop={3}>
+              <ListItem
+                fontSize={{ base: "10pt", md: "12pt", lg: "14pt" }}
+                marginTop={3}
+              >
                 Embrace challenges and persevere through obstacles
               </ListItem>
-              <ListItem fontSize={"14pt"} marginTop={3}>
+              <ListItem
+                fontSize={{ base: "10pt", md: "12pt", lg: "14pt" }}
+                marginTop={3}
+              >
                 A brand centered toward helping people with mental health
               </ListItem>
-              <ListItem fontSize={"14pt"} marginTop={3}>
+              <ListItem
+                fontSize={{ base: "10pt", md: "12pt", lg: "14pt" }}
+                marginTop={3}
+              >
                 Helping people succeed with their endeavors
               </ListItem>
-              <ListItem fontSize={"14pt"} marginTop={3}>
+              <ListItem
+                fontSize={{ base: "10pt", md: "12pt", lg: "14pt" }}
+                marginTop={3}
+              >
                 New up and coming brand that will revolutionize the world
               </ListItem>
             </UnorderedList>
@@ -355,6 +432,7 @@ export default function Home() {
               paddingTop={7}
               paddingBottom={7}
               colorScheme={"transparent"}
+              fontSize={{ base: "7pt", md: "9.5pt", lg: "12pt" }}
               onClick={() => router.push("/all")}
             >
               BROWSE ALL EMBRACE DESIGNS
@@ -395,6 +473,7 @@ export default function Home() {
         paddingRight={8}
         fontSize={"18pt"}
         colorScheme={"transparent"}
+        onClick={() => router.push("/bestsellers")}
       >
         Shop all best-sellers
       </Button>
